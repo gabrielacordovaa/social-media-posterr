@@ -17,6 +17,6 @@ public class PosterrService {
     }
 
     public void postPersonalContent(PostContentDTO postContentDTO){
-
+        // todo: query user and map to save the post entity
     }
 }
