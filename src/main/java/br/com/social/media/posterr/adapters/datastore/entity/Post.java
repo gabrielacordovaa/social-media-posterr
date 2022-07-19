@@ -1,5 +1,6 @@
 package br.com.social.media.posterr.adapters.datastore.entity;
 
+import br.com.social.media.posterr.application.enums.PostType;
 import lombok.Builder;
 import lombok.Data;
 
@@ -23,4 +24,6 @@ public class Post {
 
     @Column(length = 777)
     private String postContent;
+
+    private PostType type;
 }
