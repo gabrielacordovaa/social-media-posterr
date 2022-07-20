@@ -16,7 +16,7 @@ public class User {
     @Id
     private String id;
 
-    @Column(length = 14)
+    @Column(length = 14) // only accepts alphanumeric
     private String name;
 
     private Integer counterPosts;
