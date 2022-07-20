@@ -27,7 +27,6 @@ public class PosterrController {
     @PostMapping(value = "/personal/post")
     public ResponseEntity<StandardResponse> postPersonalContent(@Valid @RequestBody PostContentRequest postContentRequest){
         if(posterrService.isUserAbleToPost(postContentRequest.getUserId())){
-
             try{
 
                 posterrService.postPersonalContent(

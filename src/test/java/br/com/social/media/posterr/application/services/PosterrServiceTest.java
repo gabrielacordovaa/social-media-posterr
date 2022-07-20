@@ -2,6 +2,8 @@ package br.com.social.media.posterr.application.services;
 
 import br.com.social.media.posterr.adapters.datastore.repository.PostRepository;
 import br.com.social.media.posterr.adapters.datastore.repository.UserRepository;
+import br.com.social.media.posterr.application.mapper.PostEntityMapper;
+import br.com.social.media.posterr.application.mapper.UserResponseMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,10 +24,14 @@ public class PosterrServiceTest {
     private PostRepository postRepository;
     @Mock
     private UserRepository userRepository;
+    @Mock
+    private UserResponseMapper userResponseMapper;
+    @Mock
+    private PostEntityMapper postEntityMapper;
 
     @BeforeEach
     void initial(){
-        posterrService = new PosterrService(postRepository, userRepository);
+        posterrService = new PosterrService(postRepository, userRepository, userResponseMapper, postEntityMapper);
     }
 
     @Test
