@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -20,6 +20,7 @@ public class User {
     private String name;
 
     private Integer counterPosts;
+
     private Date dateJoined;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = false)
