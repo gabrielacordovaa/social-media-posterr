@@ -81,6 +81,28 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.pitest</groupId>
+				<artifactId>pitest-maven</artifactId>
+				<version>1.6.7</version>
+				<configuration>
+					<excludedClasses>
+						<param>br.com.social.media.posterr.PosterrApplication.class</param>
+						<param>br.com.social.media.posterr.adapters.controller.request.*</param>
+						<param>br.com.social.media.posterr.adapters.controller.response.*</param>
+						<param>br.com.social.media.posterr.adapters.datastore.*</param>
+						<param>br.com.social.media.posterr.application.dto.*</param>
+						<param>br.com.social.media.posterr.application.enums.*</param>
+					</excludedClasses>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.pitest</groupId>
+						<artifactId>pitest-junit5-plugin</artifactId>
+						<version>0.12</version>
+					</dependency>
+				</dependencies>
+			</plugin>
 		</plugins>
 	</build>
 
