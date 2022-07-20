@@ -28,6 +28,6 @@ public class PostEntityMapperTest {
         Assertions.assertNotNull(map);
         Assertions.assertNotNull(map.getUser());
         Assertions.assertEquals(postContentDTO.getContent(), map.getPostContent());
-        
+
     }
 }
