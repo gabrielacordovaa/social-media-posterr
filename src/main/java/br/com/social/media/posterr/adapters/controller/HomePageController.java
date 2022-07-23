@@ -36,26 +36,27 @@ public class HomePageController {
     }
 
     @GetMapping(value = "/posts/date-range")
-    public ResponseEntity<List<Post>> getAllPostsBetweenDates(@RequestParam(required = false) String startDate, @RequestParam(required = false) String endDate){
-        try {
-            return ResponseEntity.ok(posterrService.getAllPostsBetween(startDate, endDate));
-        }
-        catch (ParseException e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(Collections.singletonList(Post.builder().build())
-                    );
-        }
-    }
-
-    @GetMapping(value = "posts/{userId}")
-    public ResponseEntity<List<Post>> getUserPosts(@PathParam(value = "userId") Integer userId){
-        List<Post> posts = posterrService.getPostsByUserId(userId);
+    public ResponseEntity<List<PostDTO>> getAllPostsBetweenDates(@RequestParam(name = "start", required = false) String startDate, @RequestParam(name = "end", required = false) String endDate){
+        List<PostDTO> posts = posterrService.getAllPostsBetween(startDate, endDate);
         if(!posts.isEmpty()){
             return ResponseEntity.ok(posts);
         }
         else{
             return ResponseEntity.status(HttpStatus.NO_CONTENT)
-                    .body(Collections.singletonList(Post.builder().build())
+                    .body(Collections.singletonList(PostDTO.builder().build())
+                    );
+        }
+    }
+
+    @GetMapping(value = "posts/{userId}")
+    public ResponseEntity<List<PostDTO>> getUserPosts(@PathParam(value = "userId") Integer userId){
+        List<PostDTO> posts = posterrService.getPostsByUserId(userId);
+        if(!posts.isEmpty()){
+            return ResponseEntity.ok(posts);
+        }
+        else{
+            return ResponseEntity.status(HttpStatus.NO_CONTENT)
+                    .body(Collections.singletonList(PostDTO.builder().build())
                     );
         }
     }

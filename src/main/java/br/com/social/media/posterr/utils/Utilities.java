@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 public class Utilities {
 
     public static LocalDateTime fixDate(String date){
-        if(! date.isEmpty()){
+        if(!date.isEmpty()){
             DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDateTime fixDate = LocalDate.parse(date, format).atStartOfDay();
 

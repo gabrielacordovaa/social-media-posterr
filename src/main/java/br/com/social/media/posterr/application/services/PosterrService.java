@@ -10,6 +10,7 @@ import br.com.social.media.posterr.application.dto.PostContentDTO;
 import br.com.social.media.posterr.application.dto.PostDTO;
 import br.com.social.media.posterr.application.mapper.PostEntityMapper;
 import br.com.social.media.posterr.application.mapper.UserResponseMapper;
+import br.com.social.media.posterr.utils.Utilities;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.PageRequest;
@@ -54,31 +55,34 @@ public class PosterrService {
     }
 
     public List<PostDTO> getAllPosts(Integer size){
-        List<PostDTO> lista = new ArrayList<>();
-
         Pageable pagination = PageRequest.of(0, size, Sort.by("postDate").descending());
-        List<Post> posts = postRepository.findAll(pagination).toList();
-        for (Post p: posts
-        ) {
-            lista.add(postDTOMapper.map(p));
-        }
-        return lista;
+        return fixPostList(postRepository.findAll(pagination).toList());
     }
 
-    //todo: fix
-    public List<Post> getAllPostsBetween(String startDate, String endDate) throws ParseException {
-        Date start = startDate.isEmpty() ? null : new SimpleDateFormat("dd/MM/yyyy").parse(startDate);
-        Date end = endDate.isEmpty() ? null : new SimpleDateFormat("dd/MM/yyyy").parse(endDate);
 
-        return postRepository.getPostByDateRange(null, null);
+    public List<PostDTO> getAllPostsBetween(String startDate, String endDate){
+        return fixPostList(postRepository.getPostByDateRange(
+                Utilities.fixDate(startDate),
+                Utilities.fixDate(endDate))
+        );
     }
 
-    public List<Post> getPostsByUserId(Integer userId){
-        return postRepository.getPostsByUserId(userId);
+    public List<PostDTO> getPostsByUserId(Integer userId){
+
+        return fixPostList(postRepository.getPostsByUserId(userId));
     }
 
     public UserResponse getUserById(Integer userId){
         Optional<User> user = userRepository.findById(userId);
         return user.map(userResponseMapper::fromEntity).orElse(null);
+    }
+
+    public List<PostDTO> fixPostList(List<Post> posts){
+        List<PostDTO> list = new ArrayList<>();
+        for (Post p: posts
+             ) {
+            list.add(postDTOMapper.map(p));
+        }
+        return list;
     }
 }
