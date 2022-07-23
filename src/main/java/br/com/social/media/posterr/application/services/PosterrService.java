@@ -11,7 +11,6 @@ import br.com.social.media.posterr.application.dto.PostDTO;
 import br.com.social.media.posterr.application.mapper.PostEntityMapper;
 import br.com.social.media.posterr.application.mapper.UserResponseMapper;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
