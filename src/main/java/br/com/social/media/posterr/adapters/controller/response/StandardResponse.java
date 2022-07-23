@@ -9,6 +9,6 @@ import lombok.Data;
 public class StandardResponse {
 
     private String message;
-    private String userId;
+    private Integer userId;
     private Status status;
 }

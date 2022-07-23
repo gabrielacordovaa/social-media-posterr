@@ -18,7 +18,7 @@ public class User {
 
     @Id
     @Column(name = "ID")
-    private String id;
+    private Integer id;
 
     @Column(name = "NAME",length = 14)
     private String name;

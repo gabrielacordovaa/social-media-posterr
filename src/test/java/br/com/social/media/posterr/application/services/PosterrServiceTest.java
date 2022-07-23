@@ -37,14 +37,14 @@ public class PosterrServiceTest {
     @Test
     void isUserAbleToPost_True_Test(){
         when(postRepository.getUserDailyPublication(any())).thenReturn(4);
-        Assertions.assertTrue(posterrService.isUserAbleToPost("821921"));
+        Assertions.assertTrue(posterrService.isUserAbleToPost(1));
         verify(postRepository, times(1)).getUserDailyPublication(any());
     }
 
     @Test
     void isUserAbleToPost_False_Test(){
         when(postRepository.getUserDailyPublication(any())).thenReturn(5);
-        Assertions.assertFalse(posterrService.isUserAbleToPost("821921"));
+        Assertions.assertFalse(posterrService.isUserAbleToPost(1));
         verify(postRepository, times(1)).getUserDailyPublication(any());
     }
 }

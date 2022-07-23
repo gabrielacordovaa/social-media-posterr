@@ -6,6 +6,7 @@ import br.com.social.media.posterr.adapters.datastore.entity.User;
 import br.com.social.media.posterr.application.dto.PostContentDTO;
 import br.com.social.media.posterr.application.enums.PostType;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +15,7 @@ public class GenerateBuilders {
 
     public static PostContentRequest generatePostContentRequest(){
         return  PostContentRequest.builder()
-                .userId("2891821921")
+                .userId(2)
                 .content("OLA ESTOU TENTANDO ENVIAR ESSA MENSAGEM AQUI")
                 .build();
     }
@@ -22,24 +23,23 @@ public class GenerateBuilders {
     public static User generateUser(){
 
         return User.builder()
-                .id("1")
+                .id(1)
                 .counterPosts(5)
-                .dateJoined(new Date())
+                .dateJoined(LocalDateTime.now())
                 .name("Joshua")
                 .posts(generatePosts())
                 .build();
     }
 
     public static List<Post> generatePosts(){
-        java.util.Date data = new java.util.Date();
 
         return Collections.singletonList(Post.builder()
                         .type(PostType.PERSONAL)
-                        .postDate(data)
+                        .postDate(LocalDateTime.now())
                         .postContent("Celebrating one year at Posterr!!")
-                        .postId("1213232")
+                        .postId(3)
                         .user(User.builder()
-                                .id("1")
+                                .id(4)
                                 .build())
                 .build());
 
@@ -48,7 +48,7 @@ public class GenerateBuilders {
     public static PostContentDTO generatePostContentDTO(){
         return PostContentDTO.builder()
                 .content("MY CONTENT")
-                .id("2")
+                .id(2)
                 .build();
     }
 }

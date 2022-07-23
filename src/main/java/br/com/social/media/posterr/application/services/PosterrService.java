@@ -31,7 +31,7 @@ public class PosterrService {
     private UserResponseMapper userResponseMapper;
     private PostEntityMapper postEntityMapper;
 
-    public Boolean isUserAbleToPost(String id){
+    public Boolean isUserAbleToPost(Integer id){
         return postRepository.getUserDailyPublication(id) < 5;
     }
 
@@ -62,11 +62,11 @@ public class PosterrService {
         return postRepository.getPostByDateRange(null, null);
     }
 
-    public List<Post> getPostsByUserId(String userId){
+    public List<Post> getPostsByUserId(Integer userId){
         return postRepository.getPostsByUserId(userId);
     }
 
-    public UserResponse getUserById(String userId){
+    public UserResponse getUserById(Integer userId){
         Optional<User> user = userRepository.findById(userId);
         if(user.isPresent()){
             return userResponseMapper.fromEntity(user.get());

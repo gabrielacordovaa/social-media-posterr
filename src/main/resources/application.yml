@@ -7,19 +7,15 @@ spring:
   application:
     name: posterr
   datasource:
-    url: jdbc:h2:mem:testdb
-    username: sa
-    password: password
-    driverClassName: org.h2.Driver
+    url: "jdbc:mysql://localhost:3306/posterr"
+    username: root
+    password: qyyknz@1
+    hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    defer-datasource-initialization: true
-  h2:
-    console:
-      path: /h2-console
-      enabled: true
-      settings:
-        trace: false
-        web-allow-others: false
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: none
 
 logging.level.org.springframework: info

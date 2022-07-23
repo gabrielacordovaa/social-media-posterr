@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 public class PostContentRequest {
 
     @NotNull(message = "User Id can not be null. Please, verify the request.")
-    private String userId;
+    private Integer userId;
 
     @Length(max = 777, message = "777 is the maximum number of characters allowed.")
     private String content;

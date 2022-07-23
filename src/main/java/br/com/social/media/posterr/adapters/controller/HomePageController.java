@@ -55,7 +55,7 @@ public class HomePageController {
     }
 
     @GetMapping(value = "posts/{userId}")
-    public ResponseEntity<List<Post>> getUserPosts(@PathParam(value = "userId") String userId){
+    public ResponseEntity<List<Post>> getUserPosts(@PathParam(value = "userId") Integer userId){
         List<Post> posts = posterrService.getPostsByUserId(userId);
         if(!posts.isEmpty()){
             return ResponseEntity.ok(posts);

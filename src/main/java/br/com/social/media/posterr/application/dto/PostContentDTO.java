@@ -7,6 +7,6 @@ import lombok.Data;
 @Builder
 public class PostContentDTO {
 
-    private String id;
+    private Integer id;
     private String content;
 }

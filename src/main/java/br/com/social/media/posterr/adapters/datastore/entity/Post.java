@@ -19,7 +19,7 @@ public class Post {
 
     @Id
     @Column(name = "POST_ID")
-    private String postId;
+    private Integer postId;
 
     @Column(name = "POST_DATE")
     private LocalDateTime postDate;
@@ -27,7 +27,7 @@ public class Post {
     @Column(name = "POST_CONTENT", length = 777)
     private String postContent;
 
-    @Column(name = "TYPE")
+    @Column(name = "POST_TYPE")
     @Enumerated(EnumType.STRING)
     private PostType type;
 

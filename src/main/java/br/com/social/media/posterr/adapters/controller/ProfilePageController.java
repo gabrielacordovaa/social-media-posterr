@@ -39,7 +39,7 @@ public class ProfilePageController {
     }
 
     @GetMapping(value = "/info/{userId}")
-    public ResponseEntity<UserResponse> getUserInfo(@PathParam(value = "userId") String id){
+    public ResponseEntity<UserResponse> getUserInfo(@PathParam(value = "userId") Integer id){
         try {
             return ResponseEntity.ok(posterrService.getUserById(id));
         }
