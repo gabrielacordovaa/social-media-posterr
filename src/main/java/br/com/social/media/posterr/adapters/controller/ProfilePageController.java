@@ -5,6 +5,7 @@ import br.com.social.media.posterr.adapters.controller.response.StandardResponse
 import br.com.social.media.posterr.adapters.controller.response.UserResponse;
 import br.com.social.media.posterr.adapters.datastore.entity.Post;
 import br.com.social.media.posterr.adapters.datastore.entity.User;
+import br.com.social.media.posterr.application.dto.PostDTO;
 import br.com.social.media.posterr.application.enums.Status;
 import br.com.social.media.posterr.application.services.PosterrService;
 import lombok.RequiredArgsConstructor;
@@ -26,14 +27,14 @@ public class ProfilePageController {
     private static final Integer size = 5;
     private final PosterrService posterrService;
     @GetMapping(value = "/posts")
-    public ResponseEntity<List<Post>> getAllPosts(){
-        List<Post> posts = posterrService.getAllPosts(5);
+    public ResponseEntity<List<PostDTO>> getAllPosts(){
+        List<PostDTO> posts = posterrService.getAllPosts(5);
         if(!posts.isEmpty()){
             return ResponseEntity.ok(posts);
         }
         else{
             return ResponseEntity.status(HttpStatus.NO_CONTENT)
-                    .body(Collections.singletonList(Post.builder().build())
+                    .body(Collections.singletonList(PostDTO.builder().build())
                     );
         }
     }

@@ -5,10 +5,13 @@ import br.com.social.media.posterr.adapters.datastore.entity.Post;
 import br.com.social.media.posterr.adapters.datastore.entity.User;
 import br.com.social.media.posterr.adapters.datastore.repository.PostRepository;
 import br.com.social.media.posterr.adapters.datastore.repository.UserRepository;
+import br.com.social.media.posterr.adapters.mappers.PostDTOMapper;
 import br.com.social.media.posterr.application.dto.PostContentDTO;
+import br.com.social.media.posterr.application.dto.PostDTO;
 import br.com.social.media.posterr.application.mapper.PostEntityMapper;
 import br.com.social.media.posterr.application.mapper.UserResponseMapper;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -28,9 +32,10 @@ public class PosterrService {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;
-    private UserResponseMapper userResponseMapper;
-    private PostEntityMapper postEntityMapper;
+    private final UserResponseMapper userResponseMapper;
+    private final PostEntityMapper postEntityMapper;
 
+    private final PostDTOMapper postDTOMapper;
     public Boolean isUserAbleToPost(Integer id){
         return postRepository.getUserDailyPublication(id) < 5;
     }
@@ -49,9 +54,16 @@ public class PosterrService {
 
     }
 
-    public List<Post> getAllPosts(Integer size){
+    public List<PostDTO> getAllPosts(Integer size){
+        List<PostDTO> lista = new ArrayList<>();
+
         Pageable pagination = PageRequest.of(0, size, Sort.by("postDate").descending());
-        return postRepository.findAll(pagination).toList();
+        List<Post> posts = postRepository.findAll(pagination).toList();
+        for (Post p: posts
+        ) {
+            lista.add(postDTOMapper.map(p));
+        }
+        return lista;
     }
 
     //todo: fix

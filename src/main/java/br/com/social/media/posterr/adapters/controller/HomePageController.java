@@ -3,6 +3,7 @@ package br.com.social.media.posterr.adapters.controller;
 import br.com.social.media.posterr.adapters.controller.request.PostContentRequest;
 import br.com.social.media.posterr.adapters.controller.response.StandardResponse;
 import br.com.social.media.posterr.adapters.datastore.entity.Post;
+import br.com.social.media.posterr.application.dto.PostDTO;
 import br.com.social.media.posterr.application.enums.Status;
 import br.com.social.media.posterr.application.services.PosterrService;
 import lombok.RequiredArgsConstructor;
@@ -28,16 +29,16 @@ import java.util.List;
 public class HomePageController {
 
     private static final Integer size = 10;
-    private PosterrService posterrService;
+    private final PosterrService posterrService;
     @GetMapping(value = "/posts")
-    public ResponseEntity<List<Post>> getAllPosts(){
-        List<Post> posts = posterrService.getAllPosts(size);
+    public ResponseEntity<List<PostDTO>> getAllPosts(){
+        List<PostDTO> posts = posterrService.getAllPosts(size);
         if(!posts.isEmpty()){
             return ResponseEntity.ok(posts);
         }
         else{
             return ResponseEntity.status(HttpStatus.NO_CONTENT)
-                                 .body(Collections.singletonList(Post.builder().build())
+                                 .body(Collections.singletonList(PostDTO.builder().build())
                                  );
         }
     }
