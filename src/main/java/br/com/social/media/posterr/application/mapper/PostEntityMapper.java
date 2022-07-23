@@ -7,8 +7,6 @@ import br.com.social.media.posterr.application.enums.PostType;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-
-
 @Component
 public class PostEntityMapper {
 

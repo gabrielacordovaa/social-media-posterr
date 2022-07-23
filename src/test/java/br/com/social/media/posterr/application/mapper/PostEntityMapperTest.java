@@ -28,6 +28,11 @@ public class PostEntityMapperTest {
         Assertions.assertNotNull(map);
         Assertions.assertNotNull(map.getUser());
         Assertions.assertEquals(postContentDTO.getContent(), map.getPostContent());
+    }
 
+    @Test
+    void addCounterTest(){
+        User newUser = mapper.addCounter(user);
+        Assertions.assertEquals(6, newUser.getCounterPosts());
     }
 }
