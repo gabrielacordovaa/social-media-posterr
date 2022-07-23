@@ -49,7 +49,7 @@ public class HomePageController {
     }
 
     @GetMapping(value = "posts/{userId}")
-    public ResponseEntity<List<PostDTO>> getUserPosts(@PathParam(value = "userId") Integer userId){
+    public ResponseEntity<List<PostDTO>> getUserPosts(@PathVariable(value = "userId") Integer userId){
         List<PostDTO> posts = posterrService.getPostsByUserId(userId);
         if(!posts.isEmpty()){
             return ResponseEntity.ok(posts);
