@@ -40,18 +40,12 @@ public class PosterrService {
         return postRepository.getUserDailyPublication(id) < 5;
     }
 
-    public void postPersonalContent(PostContentDTO postContentDTO) throws Exception {
+    public void postPersonalContent(PostContentDTO postContentDTO){
         Optional<User> user = userRepository.findById(postContentDTO.getId());
-        if(user.isPresent()){
-            postRepository.save(postEntityMapper.map(
-                                    postContentDTO,
-                                    user.get())
-            );
-        }
-        else {
-            throw new Exception("There is no user with this id");
-        }
-
+        postRepository.save(postEntityMapper.map(
+                                postContentDTO,
+                                user.get())
+        );
     }
 
     public List<PostDTO> getAllPosts(Integer size){

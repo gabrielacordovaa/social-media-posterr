@@ -25,29 +25,27 @@ public class PosterrController {
     private final PostContentDTOMapper postContentDTOMapper;
 
     @PostMapping(value = "/personal/post")
-    public ResponseEntity<StandardResponse> postPersonalContent(@Valid @RequestBody PostContentRequest postContentRequest){
-        if(posterrService.isUserAbleToPost(postContentRequest.getUserId())){
-            try{
+    public ResponseEntity<StandardResponse> postPersonalContent(@Valid @RequestBody PostContentRequest postContentRequest) {
+        if (posterrService.isUserAbleToPost(postContentRequest.getUserId())) {
 
-                posterrService.postPersonalContent(
-                        postContentDTOMapper.map(
-                                postContentRequest));
+            posterrService.postPersonalContent(
+                    postContentDTOMapper.map(
+                            postContentRequest));
 
-                return ResponseEntity.ok(StandardResponse.builder()
-                        .status(Status.SUCCESS)
-                        .message("Successful Publication!!")
-                        .userId(postContentRequest.getUserId())
-                        .build());
-            }
-            catch(Exception e){
-                ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(StandardResponse.builder()
-                                .status(Status.FAILED)
-                                .message("The user has exceeded the daily publication limit.")
-                                .userId(postContentRequest.getUserId())
-                                .build());
-            }
+            return ResponseEntity.ok(StandardResponse.builder()
+                    .status(Status.SUCCESS)
+                    .message("Successful Publication!!")
+                    .userId(postContentRequest.getUserId())
+                    .build());
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(StandardResponse.builder()
+                            .status(Status.FAILED)
+                            .message("The user has exceeded the daily publication limit.")
+                            .userId(postContentRequest.getUserId())
+                            .build());
+
+
         }
-        return null;
     }
 }
