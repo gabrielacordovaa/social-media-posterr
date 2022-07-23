@@ -1,6 +1,7 @@
 package br.com.social.media.posterr.utils;
 
 import br.com.social.media.posterr.adapters.controller.request.PostContentRequest;
+import br.com.social.media.posterr.adapters.controller.response.UserResponse;
 import br.com.social.media.posterr.adapters.datastore.entity.Post;
 import br.com.social.media.posterr.adapters.datastore.entity.User;
 import br.com.social.media.posterr.application.dto.PostContentDTO;
@@ -49,6 +50,14 @@ public class GenerateBuilders {
         return PostContentDTO.builder()
                 .content("MY CONTENT")
                 .id(2)
+                .build();
+    }
+
+    public static UserResponse generateUserResponse(){
+        return UserResponse.builder()
+                .postsCounter(2)
+                .userName("Rafael")
+                .dateJoined("July 23, 2022")
                 .build();
     }
 }

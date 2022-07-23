@@ -37,5 +37,4 @@ public class Utilities {
         return f.format(data);
     }
 
-
 }
