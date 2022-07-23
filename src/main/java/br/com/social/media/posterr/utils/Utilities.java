@@ -1,8 +1,12 @@
 package br.com.social.media.posterr.utils;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,7 +23,6 @@ public class Utilities {
         return null;
     }
 
-    //todo: check this
     public static boolean validateUsername(String userName){
         String regExp = "^[^<>{}\"/|;:.,~!?@#$%^=&*\\]\\\\()\\[¿§«»ω⊙¤°℃℉€¥£¢¡®©0-9_+]*$";
         Pattern regex = Pattern.compile(regExp);
@@ -27,4 +30,12 @@ public class Utilities {
 
         return m.matches();
     }
+
+    public static String formatDate(LocalDateTime data){
+        Locale local = new Locale("EN","US");
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("MMMM dd, yyyy", local);
+        return f.format(data);
+    }
+
+
 }

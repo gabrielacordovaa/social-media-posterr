@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 public class UserResponseMapperTest {
 
     private UserResponseMapper mapper;
-
     private User user;
 
     @BeforeEach
@@ -18,7 +17,6 @@ public class UserResponseMapperTest {
         mapper = new UserResponseMapper();
         user = GenerateBuilders.generateUser();
     }
-
     @Test
     void mapTest(){
         UserResponse map = mapper.fromEntity(user);
@@ -26,7 +24,7 @@ public class UserResponseMapperTest {
         Assertions.assertNotNull(map);
         Assertions.assertEquals(user.getName(), map.getUserName());
         Assertions.assertEquals(user.getCounterPosts(), map.getPostsCounter());
-        //Assertions.assertEquals(mapper.formatDate(user.getDateJoined()), map.getDateJoined());
+        Assertions.assertEquals("July 23, 2022", map.getDateJoined());
 
     }
 }

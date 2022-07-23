@@ -80,9 +80,6 @@ public class PosterrService {
 
     public UserResponse getUserById(Integer userId){
         Optional<User> user = userRepository.findById(userId);
-        if(user.isPresent()){
-            return userResponseMapper.fromEntity(user.get());
-        }
-        return null;
+        return user.map(userResponseMapper::fromEntity).orElse(null);
     }
 }

@@ -1,7 +1,10 @@
 package br.com.social.media.posterr.utils;
 
+import jdk.jshell.execution.Util;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDateTime;
 
 public class UtilitiesTest {
 
@@ -23,5 +26,10 @@ public class UtilitiesTest {
     @Test
     void validateUsername_False_Test(){
         Assertions.assertFalse(Utilities.validateUsername("g~~iela"));
+    }
+
+    @Test
+    void formatDateTest(){
+        System.out.println(Utilities.formatDate(LocalDateTime.now()));
     }
 }
