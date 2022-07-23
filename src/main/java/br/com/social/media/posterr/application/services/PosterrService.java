@@ -13,6 +13,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,6 +23,7 @@ import java.util.Optional;
 
 @Log4j2
 @AllArgsConstructor
+@Service
 public class PosterrService {
 
     private final PostRepository postRepository;
@@ -52,11 +54,12 @@ public class PosterrService {
         return postRepository.findAll(pagination).toList();
     }
 
+    //todo: fix
     public List<Post> getAllPostsBetween(String startDate, String endDate) throws ParseException {
         Date start = startDate.isEmpty() ? null : new SimpleDateFormat("dd/MM/yyyy").parse(startDate);
         Date end = endDate.isEmpty() ? null : new SimpleDateFormat("dd/MM/yyyy").parse(endDate);
 
-        return postRepository.getPostByDateRange(start, end);
+        return postRepository.getPostByDateRange(null, null);
     }
 
     public List<Post> getPostsByUserId(String userId){

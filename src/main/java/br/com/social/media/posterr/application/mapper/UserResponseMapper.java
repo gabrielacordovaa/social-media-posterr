@@ -15,7 +15,7 @@ public class UserResponseMapper {
     public UserResponse fromEntity(User user){
         return UserResponse.builder()
                 .userName(user.getName())
-                .dateJoined(formatDate(user.getDateJoined()))
+                //.dateJoined(formatDate(user.getDateJoined()))
                 .postsCounter(user.getCounterPosts())
                 .build();
     }

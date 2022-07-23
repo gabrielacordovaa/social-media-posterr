@@ -1,28 +1,34 @@
 package br.com.social.media.posterr.adapters.datastore.entity;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = {"name"})})
-@Data
+@Table(name = "users")
+@Getter
+@Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
+    @Column(name = "ID")
     private String id;
 
-    @Column(length = 14) // only accepts alphanumeric
+    @Column(name = "NAME",length = 14)
     private String name;
 
+    @Column(name = "COUNTER_POSTS")
     private Integer counterPosts;
 
-    private Date dateJoined;
+    @Column(name = "DATE_JOINED")
+    private LocalDateTime dateJoined;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = false)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Post> posts;
 }
