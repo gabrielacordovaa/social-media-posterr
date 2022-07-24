@@ -5,6 +5,7 @@ import br.com.social.media.posterr.adapters.controller.response.UserResponse;
 import br.com.social.media.posterr.adapters.datastore.entity.Post;
 import br.com.social.media.posterr.adapters.datastore.entity.User;
 import br.com.social.media.posterr.application.dto.PostContentDTO;
+import br.com.social.media.posterr.application.dto.PostDTO;
 import br.com.social.media.posterr.application.enums.PostType;
 
 import java.time.LocalDateTime;
@@ -58,6 +59,16 @@ public class GenerateBuilders {
                 .postsCounter(2)
                 .userName("Rafael")
                 .dateJoined("July 23, 2022")
+                .build();
+    }
+
+    public static PostDTO generatePostDTO(){
+        return PostDTO.builder()
+                .userId(1)
+                .type(PostType.PERSONAL)
+                .postDate(LocalDateTime.now())
+                .postContent("My post.")
+                .postId(3)
                 .build();
     }
 }

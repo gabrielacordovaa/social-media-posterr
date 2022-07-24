@@ -2,6 +2,7 @@ package br.com.social.media.posterr.application.services;
 
 import br.com.social.media.posterr.adapters.datastore.repository.PostRepository;
 import br.com.social.media.posterr.adapters.datastore.repository.UserRepository;
+import br.com.social.media.posterr.adapters.mappers.FixListPostMapper;
 import br.com.social.media.posterr.adapters.mappers.PostDTOMapper;
 import br.com.social.media.posterr.application.dto.PostDTO;
 import br.com.social.media.posterr.application.mapper.PostEntityMapper;
@@ -36,10 +37,19 @@ public class PosterrServiceTest {
     private PostEntityMapper postEntityMapper;
     @Mock
     private PostDTOMapper postDTOMapper;
+    @Mock
+    private FixListPostMapper fixListPostMapper;
 
     @BeforeEach
     void initial(){
-        posterrService = new PosterrService(postRepository, userRepository, userResponseMapper, postEntityMapper, postDTOMapper);
+        posterrService = new PosterrService(
+                postRepository,
+                userRepository,
+                userResponseMapper,
+                postEntityMapper,
+                postDTOMapper,
+                fixListPostMapper
+        );
     }
 
     @Test

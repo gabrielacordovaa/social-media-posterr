@@ -6,6 +6,7 @@ import br.com.social.media.posterr.adapters.datastore.entity.Post;
 import br.com.social.media.posterr.adapters.datastore.entity.User;
 import br.com.social.media.posterr.adapters.datastore.repository.PostRepository;
 import br.com.social.media.posterr.adapters.datastore.repository.UserRepository;
+import br.com.social.media.posterr.adapters.mappers.FixListPostMapper;
 import br.com.social.media.posterr.adapters.mappers.PostDTOMapper;
 import br.com.social.media.posterr.application.dto.PostContentDTO;
 import br.com.social.media.posterr.application.dto.PostDTO;
@@ -34,8 +35,8 @@ public class PosterrService {
     private final UserRepository userRepository;
     private final UserResponseMapper userResponseMapper;
     private final PostEntityMapper postEntityMapper;
-
     private final PostDTOMapper postDTOMapper;
+    private final FixListPostMapper fixListPostMapper;
     public Boolean isUserAbleToPost(Integer id){
         return postRepository.getUserDailyPublication(id) < 5;
     }
@@ -50,12 +51,12 @@ public class PosterrService {
 
     public List<PostDTO> getAllPosts(Integer size){
         Pageable pagination = PageRequest.of(0, size, Sort.by("postDate").descending());
-        return fixPostList(postRepository.findAll(pagination).toList());
+        return fixListPostMapper.fixPostList(postRepository.findAll(pagination).toList());
     }
 
 
     public List<PostDTO> getAllPostsBetween(String startDate, String endDate){
-        return fixPostList(postRepository.getPostByDateRange(
+        return fixListPostMapper.fixPostList(postRepository.getPostByDateRange(
                 FieldsFixer.fixDate(startDate),
                 FieldsFixer.fixDate(endDate))
         );
@@ -63,7 +64,7 @@ public class PosterrService {
 
     public List<PostDTO> getPostsByUserId(Integer userId){
 
-        return fixPostList(postRepository.getPostsByUserId(userId));
+        return fixListPostMapper.fixPostList(postRepository.getPostsByUserId(userId));
     }
 
     public UserResponse getUserById(Integer userId){
@@ -71,14 +72,6 @@ public class PosterrService {
         return user.map(userResponseMapper::fromEntity).orElse(null);
     }
 
-    public List<PostDTO> fixPostList(List<Post> posts){
-        List<PostDTO> list = new ArrayList<>();
-        for (Post p: posts
-             ) {
-            list.add(postDTOMapper.map(p));
-        }
-        return list;
-    }
     public PostDTO postInteraction(PostInteractiveRequest postInteractive){
 
         Optional<Post> post = postRepository.findById(postInteractive.getPostId());
@@ -92,7 +85,6 @@ public class PosterrService {
                                                                 .build(), user.get())));
             }
         }
-
          return null;
     }
 }

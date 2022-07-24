@@ -31,4 +31,37 @@ public class FieldsFixerTest {
     void formatDateTest(){
         Assertions.assertEquals("July 24, 2022", FieldsFixer.formatDate(LocalDateTime.parse("2022-07-24T11:48:12.34")));
     }
+
+    @Test
+    void isTheActionValidRepostQuoteTrueTest(){
+        Assertions.assertTrue(FieldsFixer.isTheActionValid("REPOST", "QUOTE"));
+    }
+
+    @Test
+    void isTheActionValidRepostPersonalTrueTest(){
+        Assertions.assertTrue(FieldsFixer.isTheActionValid("REPOST", "personal"));
+    }
+
+    @Test
+    void isTheActionValidRepostFalseTest(){
+        Assertions.assertFalse(FieldsFixer.isTheActionValid("REPOST", "repost"));
+    }
+
+    @Test
+    void isTheActionValidQuoteRespostTrueTest(){
+        Assertions.assertTrue(FieldsFixer.isTheActionValid("QUOTE", "repost"));
+    }
+    @Test
+    void isTheActionValidQuotePersonalTrueTest(){
+        Assertions.assertTrue(FieldsFixer.isTheActionValid("QUOTE", "personal"));
+    }
+    @Test
+    void isTheActionValidQuoteFalseTest(){
+        Assertions.assertFalse(FieldsFixer.isTheActionValid("QUOTE", "quote"));
+    }
+
+    @Test
+    void isTheActionValidFalseTest(){
+        Assertions.assertFalse(FieldsFixer.isTheActionValid("personal", "repost"));
+    }
 }
