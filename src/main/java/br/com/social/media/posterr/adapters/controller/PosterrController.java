@@ -3,6 +3,7 @@ package br.com.social.media.posterr.adapters.controller;
 import br.com.social.media.posterr.adapters.controller.request.PostContentRequest;
 import br.com.social.media.posterr.adapters.controller.request.PostInteractiveRequest;
 import br.com.social.media.posterr.adapters.controller.response.StandardResponse;
+import br.com.social.media.posterr.application.dto.PostDTO;
 import br.com.social.media.posterr.application.enums.Status;
 import br.com.social.media.posterr.application.mapper.PostContentDTOMapper;
 import br.com.social.media.posterr.application.services.PosterrService;
@@ -29,22 +30,11 @@ public class PosterrController {
     public ResponseEntity<StandardResponse> postPersonalContent(@Valid @RequestBody PostContentRequest postContentRequest) {
         if (posterrService.isUserAbleToPost(postContentRequest.getUserId())) {
 
-            posterrService.postPersonalContent(
-                    postContentDTOMapper.map(
-                            postContentRequest));
+            posterrService.postPersonalContent(postContentDTOMapper.map(postContentRequest));
 
-            return ResponseEntity.ok(StandardResponse.builder()
-                    .status(Status.SUCCESS)
-                    .message("Successful Publication!!")
-                    .userId(postContentRequest.getUserId())
-                    .build());
+            return ResponseEntity.ok(StandardResponse.builder().status(Status.SUCCESS).message("Successful Publication!!").userId(postContentRequest.getUserId()).build());
         } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(StandardResponse.builder()
-                            .status(Status.FAILED)
-                            .message("The user has exceeded the daily publication limit.")
-                            .userId(postContentRequest.getUserId())
-                            .build());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(StandardResponse.builder().status(Status.FAILED).message("The user has exceeded the daily publication limit.").userId(postContentRequest.getUserId()).build());
 
 
         }
@@ -54,14 +44,15 @@ public class PosterrController {
     public ResponseEntity<StandardResponse> postInteract(@Valid @RequestBody PostInteractiveRequest postInteractive) {
         if (posterrService.isUserAbleToPost(postInteractive.getUserId())) {
 
-            return null;
+            PostDTO post = posterrService.postInteraction(postInteractive);
+
+            if (post != null) {
+                return ResponseEntity.ok(StandardResponse.builder().status(Status.SUCCESS).message("Successful Publication!!").userId(postInteractive.getUserId()).build());
+            } else {
+                return ResponseEntity.ok(StandardResponse.builder().status(Status.FAILED).message("This action is not valid! Please verify.").userId(postInteractive.getUserId()).build());
+            }
         } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(StandardResponse.builder()
-                            .status(Status.FAILED)
-                            .message("The user has exceeded the daily publication limit.")
-                            .userId(postInteractive.getUserId())
-                            .build());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(StandardResponse.builder().status(Status.FAILED).message("The user has exceeded the daily publication limit.").userId(postInteractive.getUserId()).build());
         }
     }
 }

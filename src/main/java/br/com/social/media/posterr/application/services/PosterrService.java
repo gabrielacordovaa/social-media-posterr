@@ -86,13 +86,13 @@ public class PosterrService {
 
         if(post.isPresent() && user.isPresent()){
             if(FieldsFixer.isTheActionValid(postInteractive.getInteraction(), post.get().getType().name())){
-                postRepository.save(postEntityMapper.map(PostContentDTO.builder()
-                        .type(PostType.getPostType(postInteractive.getInteraction()))
-                        .content(post.get().getPostContent())
-                        .build(), user.get()));
+                return postDTOMapper.map(postRepository.save(postEntityMapper.map(PostContentDTO.builder()
+                                                                .type(PostType.getPostType(postInteractive.getInteraction()))
+                                                                .content(post.get().getPostContent())
+                                                                .build(), user.get())));
             }
         }
 
-     return null;
+         return null;
     }
 }
