@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Integer> {
 
-    @Query(value = "SELECT count(1) FROM posts p WHERE p.USER_ID = :id AND p.POST_DATE = CURRENT_DATE()", nativeQuery = true)
+    @Query(value = "SELECT count(1) FROM posts p WHERE p.USER_ID = :id AND DATE(p.POST_DATE) = CURRENT_DATE()", nativeQuery = true)
     Integer getUserDailyPublication(@Param("id") Integer id);
 
     @Query(value = "SELECT * FROM posts p WHERE p.POST_DATE BETWEEN (CASE WHEN :begin IS NULL THEN p.POST_DATE ELSE :begin END) AND " +

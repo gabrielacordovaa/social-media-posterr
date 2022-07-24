@@ -16,7 +16,7 @@ public class PostEntityMapper {
                 .postContent(contentDTO.getContent())
                 .user(addCounter(user))
                 .postDate(LocalDateTime.now())
-                .type(PostType.PERSONAL)
+                .type(contentDTO.getType())
                 .build();
     }
 

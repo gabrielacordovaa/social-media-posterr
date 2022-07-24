@@ -1,6 +1,7 @@
 package br.com.social.media.posterr.adapters.controller;
 
 import br.com.social.media.posterr.adapters.controller.request.PostContentRequest;
+import br.com.social.media.posterr.adapters.controller.request.PostInteractiveRequest;
 import br.com.social.media.posterr.adapters.controller.response.StandardResponse;
 import br.com.social.media.posterr.application.enums.Status;
 import br.com.social.media.posterr.application.mapper.PostContentDTOMapper;
@@ -24,7 +25,7 @@ public class PosterrController {
     private final PosterrService posterrService;
     private final PostContentDTOMapper postContentDTOMapper;
 
-    @PostMapping(value = "/personal/post")
+    @PostMapping(value = "/post/personal")
     public ResponseEntity<StandardResponse> postPersonalContent(@Valid @RequestBody PostContentRequest postContentRequest) {
         if (posterrService.isUserAbleToPost(postContentRequest.getUserId())) {
 
@@ -46,6 +47,21 @@ public class PosterrController {
                             .build());
 
 
+        }
+    }
+
+    @PostMapping(value = "/post/interact")
+    public ResponseEntity<StandardResponse> postInteract(@Valid @RequestBody PostInteractiveRequest postInteractive) {
+        if (posterrService.isUserAbleToPost(postInteractive.getUserId())) {
+
+            return null;
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(StandardResponse.builder()
+                            .status(Status.FAILED)
+                            .message("The user has exceeded the daily publication limit.")
+                            .userId(postInteractive.getUserId())
+                            .build());
         }
     }
 }

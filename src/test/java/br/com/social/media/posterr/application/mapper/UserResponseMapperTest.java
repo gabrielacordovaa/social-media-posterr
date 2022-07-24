@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+
 public class UserResponseMapperTest {
 
     private UserResponseMapper mapper;
@@ -24,7 +26,6 @@ public class UserResponseMapperTest {
         Assertions.assertNotNull(map);
         Assertions.assertEquals(user.getName(), map.getUserName());
         Assertions.assertEquals(user.getCounterPosts(), map.getPostsCounter());
-        Assertions.assertEquals("July 23, 2022", map.getDateJoined());
-
+        Assertions.assertEquals("July 24, 2022", map.getDateJoined());
     }
 }

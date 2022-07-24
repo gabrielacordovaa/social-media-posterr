@@ -26,7 +26,7 @@ public class GenerateBuilders {
         return User.builder()
                 .id(1)
                 .counterPosts(5)
-                .dateJoined(LocalDateTime.now())
+                .dateJoined(LocalDateTime.parse("2022-07-24T11:48:12.34"))
                 .name("Joshua")
                 .posts(generatePosts())
                 .build();

@@ -1,16 +1,15 @@
 package br.com.social.media.posterr.utils;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import br.com.social.media.posterr.application.enums.PostType;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Utilities {
+public class FieldsFixer {
 
     public static LocalDateTime fixDate(String date){
         if(!date.isEmpty()){
@@ -35,6 +34,16 @@ public class Utilities {
         Locale local = new Locale("EN","US");
         DateTimeFormatter f = DateTimeFormatter.ofPattern("MMMM dd, yyyy", local);
         return f.format(data);
+    }
+
+    public static boolean isTheActionValid(String action, String postType){
+        if(action.equalsIgnoreCase(PostType.REPOST.name())){
+            return postType.equalsIgnoreCase(PostType.QUOTE.name()) || postType.equalsIgnoreCase(PostType.PERSONAL.name());
+        }
+        else if(action.equalsIgnoreCase(PostType.QUOTE.name())){
+            return postType.equalsIgnoreCase(PostType.REPOST.name()) || postType.equalsIgnoreCase(PostType.PERSONAL.name());
+        }
+        return false;
     }
 
 }
