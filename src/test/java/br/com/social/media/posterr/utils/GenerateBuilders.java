@@ -1,6 +1,7 @@
 package br.com.social.media.posterr.utils;
 
 import br.com.social.media.posterr.adapters.controller.request.PostContentRequest;
+import br.com.social.media.posterr.adapters.controller.request.PostInteractiveRequest;
 import br.com.social.media.posterr.adapters.controller.response.UserResponse;
 import br.com.social.media.posterr.adapters.datastore.entity.Post;
 import br.com.social.media.posterr.adapters.datastore.entity.User;
@@ -69,6 +70,14 @@ public class GenerateBuilders {
                 .postDate(LocalDateTime.now())
                 .postContent("My post.")
                 .postId(3)
+                .build();
+    }
+
+    public static PostInteractiveRequest generatePostInteractiveRequest(){
+        return PostInteractiveRequest.builder()
+                .interaction("repost")
+                .postId(1)
+                .userId(3)
                 .build();
     }
 }

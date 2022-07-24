@@ -1,10 +1,13 @@
 package br.com.social.media.posterr.application.services;
 
+import br.com.social.media.posterr.adapters.controller.request.PostInteractiveRequest;
+import br.com.social.media.posterr.adapters.datastore.entity.Post;
 import br.com.social.media.posterr.adapters.datastore.repository.PostRepository;
 import br.com.social.media.posterr.adapters.datastore.repository.UserRepository;
 import br.com.social.media.posterr.adapters.mappers.FixListPostMapper;
 import br.com.social.media.posterr.adapters.mappers.PostDTOMapper;
 import br.com.social.media.posterr.application.dto.PostDTO;
+import br.com.social.media.posterr.application.enums.PostType;
 import br.com.social.media.posterr.application.mapper.PostEntityMapper;
 import br.com.social.media.posterr.application.mapper.UserResponseMapper;
 import br.com.social.media.posterr.utils.GenerateBuilders;
@@ -15,6 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.Collections;
@@ -42,6 +46,8 @@ public class PosterrServiceTest {
     @Mock
     private FixListPostMapper fixListPostMapper;
 
+    private PostInteractiveRequest postInteractiveRequest;
+    private Post post;
     @BeforeEach
     void initial(){
         posterrService = new PosterrService(
@@ -52,6 +58,8 @@ public class PosterrServiceTest {
                 postDTOMapper,
                 fixListPostMapper
         );
+        postInteractiveRequest = GenerateBuilders.generatePostInteractiveRequest();
+        post = GenerateBuilders.generatePosts().get(0);
     }
 
     @Test
@@ -80,18 +88,6 @@ public class PosterrServiceTest {
         verify(postEntityMapper, times(1)).map(any(), any());
         verify(postRepository, times(1)).save(any());
     }
-
-    //todo: ajustar esse teste aqui
-  /* @Test
-    void getAllPostsTest(){
-        when(postRepository.findAll((Pageable) any()).toList()).thenReturn(GenerateBuilders.generatePosts());
-        when(fixListPostMapper.fixPostList(any())).thenReturn(Collections.singletonList(GenerateBuilders.generatePostDTO()));
-        Assertions.assertNotNull(posterrService.getAllPosts(5));
-
-        verify(postRepository, times(1)).findAll((Pageable) any());
-        verify(fixListPostMapper, times(1)).fixPostList(any());
-    }*/
-
     @Test
     void getAllPostsBetweenTest(){
         when(postRepository.getPostByDateRange(any(), any())).thenReturn(GenerateBuilders.generatePosts());
@@ -123,5 +119,36 @@ public class PosterrServiceTest {
 
         verify(userRepository, times(1)).findById(any());
         verify(userResponseMapper, times(1)).fromEntity(any());
+    }
+
+    @Test
+    void postInteractionTest(){
+        when(userRepository.findById(any())).thenReturn(Optional.of(GenerateBuilders.generateUser()));
+        when(postRepository.findById(any())).thenReturn(Optional.of(post));
+        when(postDTOMapper.map(any())).thenReturn(GenerateBuilders.generatePostDTO());
+        when(postEntityMapper.map(any(), any())).thenReturn(GenerateBuilders.generatePosts().get(0));
+        when(postRepository.save(any())).thenReturn(GenerateBuilders.generatePosts().get(0));
+
+        Assertions.assertNotNull(posterrService.postInteraction(postInteractiveRequest));
+
+        verify(userRepository, times(1)).findById(any());
+        verify(postRepository, times(1)).findById(any());
+        verify(postDTOMapper, times(1)).map(any());
+        verify(postEntityMapper, times(1)).map(any(), any());
+        verify(postRepository, times(1)).save(any());
+    }
+
+    @Test
+    void postInteractionNotValidTest(){
+        post.setType(PostType.QUOTE);
+        postInteractiveRequest.setInteraction("QUOTE");
+
+        when(userRepository.findById(any())).thenReturn(Optional.of(GenerateBuilders.generateUser()));
+        when(postRepository.findById(any())).thenReturn(Optional.of(post));
+
+        Assertions.assertNull(posterrService.postInteraction(postInteractiveRequest));
+
+        verify(userRepository, times(1)).findById(any());
+        verify(postRepository, times(1)).findById(any());
     }
 }

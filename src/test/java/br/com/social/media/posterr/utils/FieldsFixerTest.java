@@ -1,7 +1,10 @@
 package br.com.social.media.posterr.utils;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.LocalDateTime;
 
@@ -32,14 +35,11 @@ public class FieldsFixerTest {
         Assertions.assertEquals("July 24, 2022", FieldsFixer.formatDate(LocalDateTime.parse("2022-07-24T11:48:12.34")));
     }
 
-    @Test
-    void isTheActionValidRepostQuoteTrueTest(){
-        Assertions.assertTrue(FieldsFixer.isTheActionValid("REPOST", "QUOTE"));
-    }
-
-    @Test
-    void isTheActionValidRepostPersonalTrueTest(){
-        Assertions.assertTrue(FieldsFixer.isTheActionValid("REPOST", "personal"));
+    @DisplayName("Repost - true")
+    @ParameterizedTest
+    @ValueSource(strings = {"quote", "personal"})
+    void isTheActionValidRepostQuoteTrueTest(String type){
+        Assertions.assertTrue(FieldsFixer.isTheActionValid("REPOST", type));
     }
 
     @Test
@@ -47,21 +47,21 @@ public class FieldsFixerTest {
         Assertions.assertFalse(FieldsFixer.isTheActionValid("REPOST", "repost"));
     }
 
-    @Test
-    void isTheActionValidQuoteRespostTrueTest(){
-        Assertions.assertTrue(FieldsFixer.isTheActionValid("QUOTE", "repost"));
-    }
-    @Test
-    void isTheActionValidQuotePersonalTrueTest(){
-        Assertions.assertTrue(FieldsFixer.isTheActionValid("QUOTE", "personal"));
+    @DisplayName("Quote - true")
+    @ParameterizedTest
+    @ValueSource(strings = {"repost", "personal"})
+    void isTheActionValidQuoteRespostTrueTest(String type){
+        Assertions.assertTrue(FieldsFixer.isTheActionValid("QUOTE", type));
     }
     @Test
     void isTheActionValidQuoteFalseTest(){
         Assertions.assertFalse(FieldsFixer.isTheActionValid("QUOTE", "quote"));
     }
 
-    @Test
-    void isTheActionValidFalseTest(){
-        Assertions.assertFalse(FieldsFixer.isTheActionValid("personal", "repost"));
+    @DisplayName("PERSONAL - false")
+    @ParameterizedTest
+    @ValueSource(strings = {"quote", "personal", "repost"})
+    void isTheActionValidFalseTest(String type){
+        Assertions.assertFalse(FieldsFixer.isTheActionValid("personal", type));
     }
 }
