@@ -37,12 +37,8 @@ public class FixListPostMapperTest {
     @Test
     void fixPostListTest(){
         when(postDTOMapper.map(any())).thenReturn(GenerateBuilders.generatePostDTO());
-        Assertions.assertNotNull(fixListPostMapper.fixPostList(postList));
+        Assertions.assertNotEquals(Collections.emptyList(), fixListPostMapper.fixPostList(postList));
         verify(postDTOMapper, times(1)).map(any());
     }
 
-    @Test
-    void fixPostListEmptyTest(){
-        Assertions.assertEquals(Collections.emptyList(), fixListPostMapper.fixPostList(new ArrayList<>()));
-    }
 }

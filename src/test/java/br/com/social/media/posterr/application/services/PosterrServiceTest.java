@@ -15,7 +15,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Pageable;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -80,28 +82,36 @@ public class PosterrServiceTest {
     }
 
     //todo: ajustar esse teste aqui
-   /* @Test
+  /* @Test
     void getAllPostsTest(){
         when(postRepository.findAll((Pageable) any()).toList()).thenReturn(GenerateBuilders.generatePosts());
-        posterrService.fixPostList(GenerateBuilders.generatePosts());
-        List<PostDTO> posts = posterrService.getAllPosts(5);
+        when(fixListPostMapper.fixPostList(any())).thenReturn(Collections.singletonList(GenerateBuilders.generatePostDTO()));
+        Assertions.assertNotNull(posterrService.getAllPosts(5));
 
         verify(postRepository, times(1)).findAll((Pageable) any());
+        verify(fixListPostMapper, times(1)).fixPostList(any());
     }*/
 
     @Test
     void getAllPostsBetweenTest(){
         when(postRepository.getPostByDateRange(any(), any())).thenReturn(GenerateBuilders.generatePosts());
+        when(fixListPostMapper.fixPostList(any())).thenReturn(Collections.singletonList(GenerateBuilders.generatePostDTO()));
 
-        Assertions.assertNotNull(posterrService.getAllPostsBetween("23/07/2022", "23/07/2022"));
+        Assertions.assertNotEquals(Collections.emptyList(), posterrService.getAllPostsBetween("23/07/2022", "23/07/2022"));
         verify(postRepository, times(1)).getPostByDateRange(any(), any());
+        verify(fixListPostMapper, times(1)).fixPostList(any());
     }
 
     @Test
     void getPostsByUserId(){
         when(postRepository.getPostsByUserId(any())).thenReturn(GenerateBuilders.generatePosts());
-        Assertions.assertNotNull(posterrService.getPostsByUserId(1));
+        when(fixListPostMapper.fixPostList(any())).thenReturn(Collections.singletonList(GenerateBuilders.generatePostDTO()));
+
+        Assertions.assertNotEquals(Collections.emptyList(), posterrService.getPostsByUserId(1));
+
         verify(postRepository, times(1)).getPostsByUserId(any());
+        verify(fixListPostMapper, times(1)).fixPostList(any());
+
     }
 
     @Test
