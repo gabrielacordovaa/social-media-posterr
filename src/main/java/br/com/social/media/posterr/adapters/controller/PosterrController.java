@@ -35,8 +35,6 @@ public class PosterrController {
             return ResponseEntity.ok(StandardResponse.builder().status(Status.SUCCESS).message("Successful Publication!!").userId(postContentRequest.getUserId()).build());
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(StandardResponse.builder().status(Status.FAILED).message("The user has exceeded the daily publication limit.").userId(postContentRequest.getUserId()).build());
-
-
         }
     }
 
@@ -49,7 +47,7 @@ public class PosterrController {
             if (post != null) {
                 return ResponseEntity.ok(StandardResponse.builder().status(Status.SUCCESS).message("Successful Publication!!").userId(postInteractive.getUserId()).build());
             } else {
-                return ResponseEntity.ok(StandardResponse.builder().status(Status.FAILED).message("This action is not valid! Please verify.").userId(postInteractive.getUserId()).build());
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(StandardResponse.builder().status(Status.FAILED).message("This action is not valid! Please verify.").userId(postInteractive.getUserId()).build());
             }
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(StandardResponse.builder().status(Status.FAILED).message("The user has exceeded the daily publication limit.").userId(postInteractive.getUserId()).build());
