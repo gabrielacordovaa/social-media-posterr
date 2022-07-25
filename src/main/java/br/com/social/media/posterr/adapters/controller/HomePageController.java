@@ -20,11 +20,14 @@ public class HomePageController {
     private final PosterrService posterrService;
     @GetMapping(value = "/posts")
     public ResponseEntity<List<PostDTO>> getAllPosts(){
+        log.info("Home-Page request posts with pagination: {}", size);
         List<PostDTO> posts = posterrService.getAllPosts(size);
         if(!posts.isEmpty()){
+            log.info("Request was made. List is not empty. Size: {}", posts.size());
             return ResponseEntity.ok(posts);
         }
         else{
+            log.info("Request was made. List is empty.");
             return ResponseEntity.status(HttpStatus.NO_CONTENT)
                                  .body(Collections.singletonList(PostDTO.builder().build())
                                  );
@@ -33,11 +36,14 @@ public class HomePageController {
 
     @GetMapping(value = "/posts/date-range")
     public ResponseEntity<List<PostDTO>> getAllPostsBetweenDates(@RequestParam(name = "start", required = false) String startDate, @RequestParam(name = "end", required = false) String endDate){
+        log.info("Home-Page request posts by date range.");
         List<PostDTO> posts = posterrService.getAllPostsBetween(startDate, endDate);
         if(!posts.isEmpty()){
+            log.info("Request was made. List is not empty. Size: {}", posts.size());
             return ResponseEntity.ok(posts);
         }
         else{
+            log.info("Request was made. List is empty.");
             return ResponseEntity.status(HttpStatus.NO_CONTENT)
                     .body(Collections.singletonList(PostDTO.builder().build())
                     );
@@ -45,11 +51,14 @@ public class HomePageController {
     }
     @GetMapping(value = "posts/{userId}")
     public ResponseEntity<List<PostDTO>> getUserPosts(@PathVariable(value = "userId") Integer userId){
+        log.info("Home-Page request posts by user_id.");
         List<PostDTO> posts = posterrService.getPostsByUserId(userId);
         if(!posts.isEmpty()){
+            log.info("Request was made. List is not empty. Size: {}", posts.size());
             return ResponseEntity.ok(posts);
         }
         else{
+            log.info("Request was made. List is empty.");
             return ResponseEntity.status(HttpStatus.NO_CONTENT)
                     .body(Collections.singletonList(PostDTO.builder().build())
                     );

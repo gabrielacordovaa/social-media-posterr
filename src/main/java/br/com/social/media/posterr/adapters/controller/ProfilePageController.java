@@ -23,10 +23,13 @@ public class ProfilePageController {
 
     @GetMapping(value = "/posts")
     public ResponseEntity<List<PostDTO>> getAllPosts() {
+        log.info("Profile-Page request posts with pagination: {}", size);
         List<PostDTO> posts = posterrService.getAllPosts(size);
         if (!posts.isEmpty()) {
+            log.info("Request was made. List is not empty. Size: {}", posts.size());
             return ResponseEntity.ok(posts);
         } else {
+            log.info("Request was made. List is empty.");
             return ResponseEntity.status(HttpStatus.NO_CONTENT)
                     .body(Collections.singletonList(PostDTO.builder().build())
                     );
@@ -35,10 +38,13 @@ public class ProfilePageController {
 
     @GetMapping(value = "/info/{userId}")
     public ResponseEntity<UserResponse> getUserInfo(@PathVariable("userId") Integer id) {
+        log.info("Profile-Page request user profile information.");
         UserResponse userResponse = posterrService.getUserById(id);
         if (userResponse != null) {
+            log.info("Request was made. User info is not empty.");
             return ResponseEntity.ok(userResponse);
         } else {
+            log.info("Request was made. User info is empty.");
             return ResponseEntity.status(HttpStatus.NO_CONTENT)
                     .body(UserResponse.builder().build()
                     );
