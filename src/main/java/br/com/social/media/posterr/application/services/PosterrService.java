@@ -41,7 +41,7 @@ public class PosterrService {
     }
 
     public void postPersonalContent(PostContentDTO postContentDTO){
-        Optional<User> user = userRepository.findById(postContentDTO.getId());
+        Optional<User> user = userRepository.findById(postContentDTO.getUserId());
         postRepository.save(postEntityMapper.map(
                                 postContentDTO,
                                 user.get())

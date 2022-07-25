@@ -24,7 +24,7 @@ public class PostContentDTOMapperTest {
 
         Assertions.assertNotNull(map);
 
-        Assertions.assertEquals(postContentRequest.getUserId(), map.getId());
+        Assertions.assertEquals(postContentRequest.getUserId(), map.getUserId());
         Assertions.assertEquals(postContentRequest.getContent(), map.getContent());
     }
 
@@ -35,7 +35,7 @@ public class PostContentDTOMapperTest {
 
         Assertions.assertNotNull(map);
 
-        Assertions.assertEquals(postContentRequest.getUserId(), map.getId());
+        Assertions.assertEquals(postContentRequest.getUserId(), map.getUserId());
         Assertions.assertNull(map.getContent());
     }
 
@@ -47,6 +47,6 @@ public class PostContentDTOMapperTest {
         Assertions.assertNotNull(map);
 
         Assertions.assertEquals(postContentRequest.getContent(), map.getContent());
-        Assertions.assertNull(map.getId());
+        Assertions.assertNull(map.getUserId());
     }
 }

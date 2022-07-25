@@ -10,7 +10,7 @@ public class PostContentDTOMapper {
 
     public PostContentDTO map(PostContentRequest postContentRequest){
         return PostContentDTO.builder()
-                .id(postContentRequest.getUserId())
+                .userId(postContentRequest.getUserId())
                 .content(postContentRequest.getContent())
                 .type(PostType.PERSONAL)
                 .build();

@@ -1,0 +1,204 @@
+{
+	"info": {
+		"_postman_id": "c688d68a-6fa1-4409-9664-08bc802bdb51",
+		"name": "Posterr",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Home-Page",
+			"item": [
+				{
+					"name": "getAllPosts() -10 by 10",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/home-page/v1/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"home-page",
+								"v1",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllPostsByDate()",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/home-page/v1/posts/date-range?start=19/07/2022&end=23/07/2022",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"home-page",
+								"v1",
+								"posts",
+								"date-range"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "19/07/2022"
+								},
+								{
+									"key": "end",
+									"value": "23/07/2022"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllPostsByUser() -> posts/{userId}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/home-page/v1/posts/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"home-page",
+								"v1",
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Profile-Page",
+			"item": [
+				{
+					"name": "getAllPosts() - 5 by 5",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/home-page/v1/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"home-page",
+								"v1",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserInformation() - info/{userId}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/profile-page/v1/info/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profile-page",
+								"v1",
+								"info",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Posterr",
+			"item": [
+				{
+					"name": "postPersonalContent()",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\" : 1, \"content\" : \"this is my post\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/posterr/v1/post/personal",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"posterr",
+								"v1",
+								"post",
+								"personal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "postInteractionContent()",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 1, \"postId\": 2, \"interaction\": \"quote\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/posterr/v1/post/interact",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"posterr",
+								"v1",
+								"post",
+								"interact"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
