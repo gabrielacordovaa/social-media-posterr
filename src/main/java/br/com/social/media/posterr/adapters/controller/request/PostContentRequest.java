@@ -3,7 +3,6 @@ package br.com.social.media.posterr.adapters.controller.request;
 import lombok.Builder;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
-
 import javax.validation.constraints.NotNull;
 
 @Data

@@ -4,7 +4,6 @@ import br.com.social.media.posterr.adapters.controller.response.UserResponse;
 import br.com.social.media.posterr.adapters.datastore.entity.User;
 import br.com.social.media.posterr.utils.FieldsFixer;
 import org.springframework.stereotype.Component;
-
 @Component
 public class UserResponseMapper {
 

@@ -1,10 +1,8 @@
 package br.com.social.media.posterr.adapters.datastore.entity;
 
 import lombok.*;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Entity

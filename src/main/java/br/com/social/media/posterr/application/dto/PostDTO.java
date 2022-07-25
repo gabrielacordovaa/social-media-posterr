@@ -1,6 +1,5 @@
 package br.com.social.media.posterr.application.dto;
 
-import br.com.social.media.posterr.adapters.datastore.entity.User;
 import br.com.social.media.posterr.application.enums.PostType;
 import lombok.Builder;
 import lombok.Data;

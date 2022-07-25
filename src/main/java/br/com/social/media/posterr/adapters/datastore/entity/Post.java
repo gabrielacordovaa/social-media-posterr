@@ -3,10 +3,8 @@ package br.com.social.media.posterr.adapters.datastore.entity;
 import br.com.social.media.posterr.application.enums.PostType;
 import lombok.*;
 
-import javax.naming.spi.NamingManager;
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Getter
