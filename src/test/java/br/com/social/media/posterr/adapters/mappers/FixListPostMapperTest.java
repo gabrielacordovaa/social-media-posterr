@@ -1,7 +1,6 @@
 package br.com.social.media.posterr.adapters.mappers;
 
 import br.com.social.media.posterr.adapters.datastore.entity.Post;
-import br.com.social.media.posterr.application.dto.PostDTO;
 import br.com.social.media.posterr.utils.GenerateBuilders;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
