@@ -13,19 +13,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import org.springframework.http.ResponseEntity;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import static org.mockito.Mockito.when;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-
 
 @ExtendWith(MockitoExtension.class)
 public class ProfilePageControllerTest {
@@ -58,7 +53,7 @@ public class ProfilePageControllerTest {
     }
 
     @Test
-    void getAllPostsEmptyTest() throws Exception {
+    void getAllPostsEmptyTest(){
         when(posterrService.getAllPosts(any())).thenReturn(Collections.emptyList());
         ResponseEntity<List<PostDTO>> listResponseEntity = profilePageController.getAllPosts();
 

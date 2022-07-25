@@ -47,7 +47,6 @@ public class HomePageController {
                     );
         }
     }
-
     @GetMapping(value = "posts/{userId}")
     public ResponseEntity<List<PostDTO>> getUserPosts(@PathVariable(value = "userId") Integer userId){
         List<PostDTO> posts = posterrService.getPostsByUserId(userId);
