@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.LocalDateTime;
 
-public class FieldsFixerTest {
+ class FieldsFixerTest {
 
     @Test
     void fixDate_Ok_Test(){

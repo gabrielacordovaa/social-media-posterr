@@ -9,7 +9,7 @@ spring:
   datasource:
     url: "jdbc:mysql://localhost:3306/posterr"
     username: root
-    password: qyyknz@1
+    password: admin
     hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     driverClassName: com.mysql.cj.jdbc.Driver
   jpa:

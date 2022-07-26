@@ -36,58 +36,60 @@ public class PosterrService {
     private final PostEntityMapper postEntityMapper;
     private final PostDTOMapper postDTOMapper;
     private final FixListPostMapper fixListPostMapper;
-    public Boolean isUserAbleToPost(Integer id){
+
+    public boolean isUserAbleToPost(Integer id) {
         return postRepository.getUserDailyPublication(id) < 5;
     }
 
-    public void postPersonalContent(PostContentDTO postContentDTO){
+    public void postPersonalContent(PostContentDTO postContentDTO) {
         Optional<User> user = userRepository.findById(postContentDTO.getUserId());
-        postRepository.save(postEntityMapper.map(
-                                postContentDTO,
-                                user.get())
-        );
+        user.ifPresent(value -> postRepository.save(postEntityMapper.map(
+                postContentDTO,
+                value)
+        ));
     }
 
-    public List<PostDTO> getAllPosts(Integer size){
+    public List<PostDTO> getAllPosts(Integer size) {
         Pageable pagination = PageRequest.of(0, size, Sort.by("postDate").descending());
         return fixListPostMapper.fixPostList(postRepository.findAll(pagination).toList());
     }
 
 
-    public List<PostDTO> getAllPostsBetween(String startDate, String endDate){
+    public List<PostDTO> getAllPostsBetween(String startDate, String endDate) {
         return fixListPostMapper.fixPostList(postRepository.getPostByDateRange(
                 FieldsFixer.fixDate(startDate),
                 FieldsFixer.fixDate(endDate))
         );
     }
-    public List<PostDTO> getAllPostsByUserIdPaginated(Integer userId, Integer size){
+
+    public List<PostDTO> getAllPostsByUserIdPaginated(Integer userId, Integer size) {
         Pageable pagination = PageRequest.of(0, size, Sort.by("POST_DATE").descending());
 
         return fixListPostMapper.fixPostList(postRepository.getPostsByUserIdPaginated(userId, pagination).toList());
     }
-    public List<PostDTO> getPostsByUserId(Integer userId){
+
+    public List<PostDTO> getPostsByUserId(Integer userId) {
 
         return fixListPostMapper.fixPostList(postRepository.getPostsByUserId(userId));
     }
 
-    public UserResponse getUserById(Integer userId){
+    public UserResponse getUserById(Integer userId) {
         Optional<User> user = userRepository.findById(userId);
         return user.map(userResponseMapper::fromEntity).orElse(null);
     }
 
-    public PostDTO postInteraction(PostInteractiveRequest postInteractive){
+    public PostDTO postInteraction(PostInteractiveRequest postInteractive) {
 
         Optional<Post> post = postRepository.findById(postInteractive.getPostId());
         Optional<User> user = userRepository.findById(postInteractive.getUserId());
 
-        if(post.isPresent() && user.isPresent()){
-            if(FieldsFixer.isTheActionValid(postInteractive.getInteraction(), post.get().getType().name())){
-                return postDTOMapper.map(postRepository.save(postEntityMapper.map(PostContentDTO.builder()
-                                                                .type(PostType.getPostType(postInteractive.getInteraction()))
-                                                                .content(post.get().getPostContent())
-                                                                .build(), user.get())));
-            }
+        if (post.isPresent() && user.isPresent() && FieldsFixer.isTheActionValid(postInteractive.getInteraction(), post.get().getType().name())) {
+            return postDTOMapper.map(postRepository.save(postEntityMapper.map(PostContentDTO.builder()
+                    .type(PostType.getPostType(postInteractive.getInteraction()))
+                    .content(post.get().getPostContent())
+                    .build(), user.get())));
+
         }
-         return null;
+        return null;
     }
 }

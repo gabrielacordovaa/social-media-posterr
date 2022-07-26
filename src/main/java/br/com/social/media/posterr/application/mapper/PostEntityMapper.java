@@ -3,7 +3,6 @@ package br.com.social.media.posterr.application.mapper;
 import br.com.social.media.posterr.adapters.datastore.entity.Post;
 import br.com.social.media.posterr.adapters.datastore.entity.User;
 import br.com.social.media.posterr.application.dto.PostContentDTO;
-import br.com.social.media.posterr.application.enums.PostType;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;

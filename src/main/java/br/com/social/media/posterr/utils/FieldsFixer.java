@@ -14,9 +14,8 @@ public class FieldsFixer {
     public static LocalDateTime fixDate(String date){
         if(!date.isEmpty()){
             DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDateTime fixDate = LocalDate.parse(date, format).atStartOfDay();
 
-            return fixDate;
+            return LocalDate.parse(date, format).atStartOfDay();
         }
 
         return null;
