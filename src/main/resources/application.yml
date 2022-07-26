@@ -1,21 +1,16 @@
-server:
-  port: 8080
-  servlet:
-    context-patch: /${spring.application.name}
-
 spring:
   application:
     name: posterr
   datasource:
-    url: "jdbc:mysql://localhost:3306/posterr"
-    username: root
-    password: admin
+    url: "jdbc:mysql://mysqldb:3306/posterr"
+    username: sa
+    password: 1234
     hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
       naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-      ddl-auto: none
+      ddl-auto: update
 
 logging.level.org.springframework: info

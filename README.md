@@ -2,7 +2,8 @@
 ## Social Media Posterr
 
 Attached to this solution there is a postman collection with all endpoints implemented with query examples.
-Also, there is a data.sql file which contains the database query to create and populate tables used is this project.
+Also, there is a data.sql file which contains the database query to create and populate tables used during this project development.
+
 
 ATTENTION: 
 In real life example adding a post would be by endpoint (/post/personal) or (post/interact) so everytime a post is made the counter post in users table would be incremented.
