@@ -89,19 +89,19 @@
 			"name": "Profile-Page",
 			"item": [
 				{
-					"name": "getAllPosts() - 5 by 5",
+					"name": "getAllUserPosts() - 5 by 5",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/home-page/v1/posts",
+							"raw": "http://localhost:8080/profile-page/v1/posts",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"home-page",
+								"profile-page",
 								"v1",
 								"posts"
 							]

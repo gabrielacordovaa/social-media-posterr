@@ -60,7 +60,11 @@ public class PosterrService {
                 FieldsFixer.fixDate(endDate))
         );
     }
+    public List<PostDTO> getAllPostsByUserIdPaginated(Integer userId, Integer size){
+        Pageable pagination = PageRequest.of(0, size, Sort.by("POST_DATE").descending());
 
+        return fixListPostMapper.fixPostList(postRepository.getPostsByUserIdPaginated(userId, pagination).toList());
+    }
     public List<PostDTO> getPostsByUserId(Integer userId){
 
         return fixListPostMapper.fixPostList(postRepository.getPostsByUserId(userId));

@@ -41,26 +41,26 @@ public class ProfilePageControllerTest {
     }
 
     @Test
-    void getAllPostsOkTest(){
-        when(posterrService.getAllPosts(any())).thenReturn(dtoList);
-        ResponseEntity<List<PostDTO>> listResponseEntity = profilePageController.getAllPosts();
+    void getAllUserPostsOkTest(){
+        when(posterrService.getAllPostsByUserIdPaginated(any(), any())).thenReturn(dtoList);
+        ResponseEntity<List<PostDTO>> listResponseEntity = profilePageController.getAllPosts(1);
 
         Assertions.assertEquals(200, listResponseEntity.getStatusCodeValue());
         Assertions.assertNotEquals(Collections.emptyList(), listResponseEntity.getBody());
 
-        verify(posterrService, times(1)).getAllPosts(any());
+        verify(posterrService, times(1)).getAllPostsByUserIdPaginated(any(), any());
 
     }
 
-    @Test
-    void getAllPostsEmptyTest(){
-        when(posterrService.getAllPosts(any())).thenReturn(Collections.emptyList());
-        ResponseEntity<List<PostDTO>> listResponseEntity = profilePageController.getAllPosts();
+  @Test
+    void getAllUserPostsEmptyTest(){
+        when(posterrService.getAllPostsByUserIdPaginated(any(), any())).thenReturn(Collections.emptyList());
+        ResponseEntity<List<PostDTO>> listResponseEntity = profilePageController.getAllPosts(1);
 
         Assertions.assertEquals(204, listResponseEntity.getStatusCodeValue());
         Assertions.assertEquals(Collections.singletonList(PostDTO.builder().build()), listResponseEntity.getBody());
 
-        verify(posterrService, times(1)).getAllPosts(any());
+        verify(posterrService, times(1)).getAllPostsByUserIdPaginated(any(),any());
 
     }
 

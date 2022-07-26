@@ -21,10 +21,10 @@ public class ProfilePageController {
     private static final Integer size = 5;
     private final PosterrService posterrService;
 
-    @GetMapping(value = "/posts")
-    public ResponseEntity<List<PostDTO>> getAllPosts() {
+    @GetMapping(value = "/posts/{userId}")
+    public ResponseEntity<List<PostDTO>> getAllPosts(@PathVariable("userId") Integer id) {
         log.info("Profile-Page request posts with pagination: {}", size);
-        List<PostDTO> posts = posterrService.getAllPosts(size);
+        List<PostDTO> posts = posterrService.getAllPostsByUserIdPaginated(id, size);
         if (!posts.isEmpty()) {
             log.info("Request was made. List is not empty. Size: {}", posts.size());
             return ResponseEntity.ok(posts);

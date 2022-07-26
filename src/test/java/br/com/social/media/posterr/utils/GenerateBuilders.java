@@ -51,7 +51,7 @@ public class GenerateBuilders {
     public static PostContentDTO generatePostContentDTO(){
         return PostContentDTO.builder()
                 .content("MY CONTENT")
-                .id(2)
+                .userId(2)
                 .build();
     }
 

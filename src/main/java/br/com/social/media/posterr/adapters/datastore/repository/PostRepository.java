@@ -1,6 +1,8 @@
 package br.com.social.media.posterr.adapters.datastore.repository;
 
 import br.com.social.media.posterr.adapters.datastore.entity.Post;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,4 +20,7 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
     @Query(value = "SELECT * FROM posts p WHERE p.USER_ID = :userId", nativeQuery = true)
     List<Post> getPostsByUserId(@Param("userId") Integer id);
+
+    @Query(value = "SELECT * FROM posts p WHERE p.USER_ID = :userId", nativeQuery = true)
+    Page<Post> getPostsByUserIdPaginated(@Param("userId") Integer id, Pageable pagination);
 }
