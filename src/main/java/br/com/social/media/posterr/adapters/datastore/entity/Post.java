@@ -17,7 +17,6 @@ public class Post {
 
     @Id
     @Column(name = "POST_ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer postId;
 
     @Column(name = "POST_DATE")
